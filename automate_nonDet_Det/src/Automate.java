@@ -51,7 +51,7 @@ public class Automate {
 
         int nb=sc.nextInt();
         int n=0;
-        instructions=new String[nb][3];
+        instructions=new String[100][3];
         for(int i=0;i<nb;i++)
         {
             n=i+1;
@@ -240,6 +240,21 @@ public class Automate {
             nbl++;
 
         }
+            int z=0;
+        for(int i=1;i<nbl;i++)
+        {
+            for(int j=1;j<nbc;j++)
+            {
+                if(automate[i][j]!="/")
+                {
+                    instructions[z][0]=automate[i][0];
+                    instructions[z][1]=automate[0][j];
+                    instructions[z][2]=automate[i][j];
+                    z++;
+                }
+                nb_instruction=z;
+            }
+        }
 
 
     }
@@ -275,6 +290,13 @@ public class Automate {
         }
     }
 
+    public String[][] getInstructions() {
+        return instructions;
+    }
+
+    public int getNbInstruction() {
+        return nb_instruction;
+    }
 
 
 }
