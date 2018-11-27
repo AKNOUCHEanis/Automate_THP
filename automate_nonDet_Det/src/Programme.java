@@ -10,13 +10,7 @@ public class Programme {
 */
 
 
-        PrintWriter f=null;
-        FileWriter fichier=new FileWriter("fichier.txt");
-        f=new PrintWriter(fichier);
 
-        f.println("kjlkjlkjlkjlkj");
-
-        f.close();
 
 
 /*
