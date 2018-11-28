@@ -1,7 +1,0 @@
-Digraph G {
-s0 -> s0 [label=a];
-s0 -> s1 [label=a];
-s1 -> s0 [label=b];
-s1 -> s2 [label=b];
-s2 -> s0 [label=c];
-}

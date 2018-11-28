@@ -14,6 +14,7 @@ public class Automate {
     private ArrayList<String> S_etats; //tous les etats
     private ArrayList<String> F_etats; //tous les etats finaux
     private ArrayList<String> X_alphabet; //l'alphabet
+    private String S0="";
 
     public Automate()
     {
@@ -38,6 +39,9 @@ public class Automate {
         {
             S_etats.add(sc.next());
         }
+
+        System.out.println("Donnez l'etat initial :");
+        S0=sc.next();
 
         System.out.println("Donnez le nombre des etats fineaux : \n");
         int nbf=sc.nextInt();
@@ -162,7 +166,6 @@ public class Automate {
                 if(automate[i][j].contains(","))
                 {
                     listen.add(automate[i][j]);
-                    System.out.println(automate[i][j]+" ,,,,,,,\n");
                 }
             }
         }
@@ -220,7 +223,7 @@ public class Automate {
                             {
                                 automate[nbl][i]=automate[nbl][i]+","+automate[nb1+1][i];
 
-                            }
+                                }
                         }
                     }
                 }
@@ -241,22 +244,50 @@ public class Automate {
 
         }
             int z=0;
+            boolean bool=true;
+            int size=F_etats.size();
+
+            S_etats.clear();
         for(int i=1;i<nbl;i++)
         {
+            if(!S_etats.contains(automate[i][0]))
+            {
+                S_etats.add(automate[i][0]);
+                for(int f=0;f<size;f++)
+                {
+                    if(automate[i][0].contains(F_etats.get(f)))
+                    {
+                        if(!F_etats.contains(automate[i][0]))
+                        {
+                            F_etats.add(automate[i][0]);
+                        }
+
+                    }
+                }
+            }
+
             for(int j=1;j<nbc;j++)
             {
                 if(automate[i][j]!="/")
                 {
-                    instructions[z][0]=automate[i][0];
-                    instructions[z][1]=automate[0][j];
-                    instructions[z][2]=automate[i][j];
-                    z++;
+                    for(int k=0;k<z;k++)
+                    {
+                        if(instructions[k][0]==automate[i][0]&&instructions[k][1]==automate[0][j]&&instructions[k][2]==automate[i][j])
+                        {
+                            bool=false;
+                        }
+                    }
+                    if(bool){
+                        instructions[z][0] = automate[i][0];
+                        instructions[z][1] = automate[0][j];
+                        instructions[z][2] = automate[i][j];
+                        z++;
+                        bool=true;
+                    }
                 }
                 nb_instruction=z;
             }
         }
-
-
     }
 
     public int rechercheTab(String tab[],int t,String mot )
@@ -298,5 +329,11 @@ public class Automate {
         return nb_instruction;
     }
 
+    public ArrayList<String> getF_etats() {
+        return F_etats;
+    }
 
+    public String getS0() {
+        return S0;
+    }
 }
