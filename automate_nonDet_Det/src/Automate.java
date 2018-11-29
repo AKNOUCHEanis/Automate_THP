@@ -336,4 +336,52 @@ public class Automate {
     public String getS0() {
         return S0;
     }
+
+    public void reconnaitreMot()
+    {
+        Scanner sc=new Scanner(System.in);
+        String mot="";
+        int len=0;
+        char x='\0';
+        boolean bool=false;
+        int var=0;
+        System.out.println("*** Reconnaissance de mot pour cet Automate ***");
+        System.out.println("Veuillez saisir un mot :    ( EXIT pour quitter ) ");
+        mot=sc.next();
+
+        while(mot.compareTo("EXIT")!=0) {
+            len=mot.length();
+            String etat = S0;
+            var=0;
+            System.out.println("Le chemin resultant du mot :" + mot + " pour cet Automate:");
+            System.out.print(etat);
+            for (int j = 0; j < len; j++) {
+                x = mot.charAt(j);
+                for (int i = 0; i < nb_instruction; i++) {
+                    if ((instructions[i][0].compareTo(etat) == 0) && (instructions[i][1].charAt(0) == x) && !bool && var==j) {
+                        etat = instructions[i][2];
+                        System.out.print(" |-" + x + "- " + etat);
+                        bool=true;
+                        var++;
+                    }
+                }
+                bool=false;
+            }
+
+
+            if (F_etats.contains(etat) && var==len) {
+                System.out.println("\nle mot :" + mot + " est reconnu par l'Automate.");
+            } else {
+                if(var!=len){
+                    System.out.print(" |-"+x+"-?\n");
+
+                }
+                System.out.println("\nle mot :" + mot + " n'est pas reconnu par L'Automate.");
+            }
+            System.out.println("");
+            System.out.println("Veuillez saisir un mot :    ( EXIT pour quitter ) ");
+            mot=sc.next();
+        }
+    }
+
 }

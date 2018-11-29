@@ -1,0 +1,11 @@
+Digraph G {
+{
+s0[shape=sdl_return];
+s0[shape=doublecircle];
+s2[shape=doublecircle];
+}
+s0 -> s0 [label=a];
+s0 -> s1 [label=a];
+s1 -> s0 [label=b];
+s1 -> s2 [label=b];
+}
